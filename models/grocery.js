@@ -17,21 +17,23 @@ const {
             allowNull: false,
             unique: true,
           },
-          name: {
+          itemName: {
             type: DataTypes.STRING,
             allowNull: false,
           },
-          category: {
-            type: DataTypes.STRING,
+          quantity: {
+            type: DataTypes.INTEGER,
             allowNull: false,
           },
           price: {
             type: DataTypes.FLOAT,
             allowNull: false,
           },
-          quantity: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
+          category: {
+            type: DataTypes.STRING,
+          },
+          brand: {
+            type: DataTypes.STRING,
           },
     }, {
       sequelize,
