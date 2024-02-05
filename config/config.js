@@ -4,14 +4,14 @@ module.exports = {
   "development": {
     "username": "root",
     "password": "90iopklbnm",
-    "database": "bus_ticket",
+    "database": "grocery_database",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "90iopklbnm",
-    "database": "bus_ticket_test",
+    "database": "grocery_database",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
