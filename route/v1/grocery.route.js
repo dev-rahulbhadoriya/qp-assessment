@@ -1,27 +1,21 @@
 const express = require('express');
-const validate = require('../middlewares/validate');
-const groceryValidation = require('../../validations/grocery.validation');
+const validate = require('../../middleware/validate');
 const groceryController = require('../../controller/grocery.controller');
 const auth = require("../../middleware/auth");
+const groceryValidation = require('../../validations/grocery.validation')
 
 const router = express.Router();
 
-const express = require('express');
-const validate = require('../middlewares/validate');
-const auth = require('../middlewares/auth'); 
-const groceryValidation = require('../validations/grocery.validation');
-const groceryController = require('../controllers/grocery.controller');
-
 router
   .route('/groceries')
-  .post(auth('manageGroceries'), validate(groceryValidation.createGrocery), groceryController.createGrocery)
-  .get(auth('getGroceries'), validate(groceryValidation.getGroceries), groceryController.getGroceries);
+  .post(auth('admin'), validate(groceryValidation.createGrocery), groceryController.createGrocery)
+  .get(auth('user'), validate(groceryValidation.getGroceries), groceryController.getAllGroceries);
 
 router
   .route('/groceries/:id')
-  .get(auth('getGroceries'), validate(groceryValidation.getGrocery), groceryController.getGrocery)
-  .put(auth('manageGroceries'), validate(groceryValidation.updateGrocery), groceryController.updateGrocery)
-  .delete(auth('manageGroceries'), validate(groceryValidation.deleteGrocery), groceryController.deleteGrocery);
+  .get(auth('user'), validate(groceryValidation.getGrocery), groceryController.getGroceryById)
+  .put(auth('admin'), validate(groceryValidation.updateGrocery), groceryController.updateGrocery)
+  .delete(auth('admin'), validate(groceryValidation.deleteGrocery), groceryController.deleteGrocery);
 
 
 module.exports = router;
