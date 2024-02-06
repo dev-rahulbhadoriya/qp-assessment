@@ -3,25 +3,30 @@ const Grocery = db.grocery;
 
 const createGrocery = async (params) => {
     const { itemName, quantity, price, category, brand } = params;
-    const grocery = {
-        itemName,
-        quantity,
-        price,
-        category,
-        brand,
-    };
-
-    const [row, created] = await Grocery.findOrCreate({
-        where: { itemName: grocery.itemName },
-        defaults: grocery,
-    });
-
-    if (created) {
-        return row;
+  
+    try {
+      const [createdGrocery, created] = await Grocery.findOrCreate({
+        where: { itemName: itemName },
+        defaults: {
+          itemName,
+          quantity,
+          price,
+          category,
+          brand,
+        },
+      });
+  
+      if (created) {
+        return createdGrocery;
+      } else {
+        return { error: 'Duplicate entry. Item with the same name already exists.' };
+      }
+    } catch (error) {
+      console.error('Error creating grocery:', error);
+      return { error: 'Internal Server Error' };
     }
-
-    return null;
-};
+  };
+  
 
 const getAllGroceries = async (filter, options) => {
     const groceries = await Grocery.findAll();

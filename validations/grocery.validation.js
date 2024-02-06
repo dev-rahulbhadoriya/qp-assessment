@@ -8,7 +8,6 @@ const createGrocery = {
     price: Joi.number().required(),
     category: Joi.string().required(),
     brand: Joi.string().required(),
-    role: Joi.string().valid('admin').required(),
   }),
 };
 
