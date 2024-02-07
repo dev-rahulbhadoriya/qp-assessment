@@ -43,9 +43,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      // Foreign key for GroceryId
       GroceryId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: {
           model: 'groceries',
           key: 'id',
