@@ -46,7 +46,7 @@ module.exports = {
       GroceryId: {
         type: Sequelize.UUID,
         references: {
-          model: 'groceries',
+          model: 'grocery',
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -54,6 +54,7 @@ module.exports = {
         allowNull: true,
       },
     });
+    await queryInterface.addIndex('inventories', ['GroceryId']);
   },
 
   down: async (queryInterface, Sequelize) => {

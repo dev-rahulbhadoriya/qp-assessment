@@ -3,8 +3,11 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Grocery extends Model {
     static associate(models) {
-      // Define associations here if needed
-    }
+      Grocery.belongsTo(models.inventory, {
+        foreignKey: 'inventoryId', 
+        as: 'inventory', 
+      });
+    } 
   }
 
   Grocery.init({
@@ -32,6 +35,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     brand: {
       type: DataTypes.STRING,
+    },
+    inventoryId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'inventory', 
+        key: 'id', 
+      },
     },
   }, {
     sequelize,

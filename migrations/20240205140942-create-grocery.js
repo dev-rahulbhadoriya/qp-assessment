@@ -27,6 +27,14 @@ module.exports = {
       brand: {
         type: Sequelize.STRING,
       },
+      inventoryId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: 'inventory',
+          key: 'id',
+        },
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -35,7 +43,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
+      
     });
+
+    // Add an index on the foreign key for optimization
+    await queryInterface.addIndex('groceries', ['inventoryId']);
+
   },
 
   down: async (queryInterface, Sequelize) => {
